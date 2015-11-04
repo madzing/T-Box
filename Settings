@@ -1,0 +1,9 @@
+Trigger:False
+Desiered Distance:2.0
+Acceptable Deviation:2.0
+Runs per Second:10.0
+SecList:1
+Gprmc:0
+Simple:0
+Length of rawlist:20.0
+Length of smoothlist:2.0
