@@ -10,7 +10,7 @@ time.sleep(4)
 ###
 
 gui = GuiService()
-serialRead = ReadSerial("/dev/ttyUSB0",4800,"$GPGGA.log","$GPRMC.log","w")
+serialRead = ReadSerial(gui.getPort(),gui.getBaudRate(),"$GPGGA.log","$GPRMC.log","w")
 serialRead.start()
 while True:
     time1 = time.time()

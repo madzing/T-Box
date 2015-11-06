@@ -1,5 +1,7 @@
+Port:/dev/ttyUSB0
+Baud:4800
 Trigger:False
-Desiered Distance:2.0
+Desiered Distance:1.0
 Acceptable Deviation:2.0
 Runs per Second:10.0
 SecList:1

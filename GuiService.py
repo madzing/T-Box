@@ -9,6 +9,19 @@ class GuiService():
             if wert in element:
                 x = element.split(":")
                 return x[1]
+    def getPort(self):
+        try:
+            self.port = self.readSettingsFile("Port")
+            return self.port
+        except:
+            return self.port
+
+    def getBaudRate(self):
+        try:
+            self.baudRate = self.readSettingsFile("Baud")
+            return self.baudRate
+        except:
+            return self.baudRate
             
     def getIsTrigger(self):
         try:
@@ -74,6 +87,8 @@ class GuiService():
             return self.listDimensions
 
     def __init__(self):
+        self.port = ""
+        self.baudRate = 0
         self.isTrigger = False
         self.desieredDistance = 1.5
         self.acceptableDeviation = 1.0

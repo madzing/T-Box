@@ -16,51 +16,63 @@ class Gui(Frame):
     def createWidgets(self):
         self.settings.pack()
 
+        self.port = Label(self.settings,text ="Port")
+        self.port.grid(row=0,column=0)
+        self.entryPort= Entry(self.settings)
+        self.entryPort.grid(row=0,column=1)
+        self.entryPort.insert(END,self.readSettingsFile("Port"))
+
+        self.baudRate = Label(self.settings,text ="Baudrate")
+        self.baudRate.grid(row=1,column=0)
+        self.entryBaudRate= Entry(self.settings)
+        self.entryBaudRate.grid(row=1,column=1)
+        self.entryBaudRate.insert(END,self.readSettingsFile("Baud"))
+
         self.desiredDistance = Label(self.settings,text ="Desired distance (m)")
-        self.desiredDistance.grid(row=0,column=0)
+        self.desiredDistance.grid(row=2,column=0)
         self.entryDisiredDistance= Entry(self.settings)
-        self.entryDisiredDistance.grid(row=0,column=1)
+        self.entryDisiredDistance.grid(row=2,column=1)
         self.entryDisiredDistance.insert(END,self.readSettingsFile("Desiered Distance"))
 
         self.acceptableDeviation = Label(self.settings,text ="Acceptable Deviation")
-        self.acceptableDeviation.grid(row=1,column=0)
+        self.acceptableDeviation.grid(row=3,column=0)
         self.entryAcceptableDeviation= Entry(self.settings)
-        self.entryAcceptableDeviation.grid(row=1,column=1)
+        self.entryAcceptableDeviation.grid(row=3,column=1)
         self.entryAcceptableDeviation.insert(END,self.readSettingsFile("Acceptable Deviation"))
 
         self.runsPerSecond = Label(self.settings,text ="Runs per second")
-        self.runsPerSecond.grid(row=2,column=0)
+        self.runsPerSecond.grid(row=4,column=0)
         self.entryRunsPerSecond= Entry(self.settings)
-        self.entryRunsPerSecond.grid(row=2,column=1)
+        self.entryRunsPerSecond.grid(row=4,column=1)
         self.entryRunsPerSecond.insert(END,self.readSettingsFile("Runs per Second"))
 
         self.smoothMode = Label(self.settings,text ="Smoothmode:")
-        self.smoothMode.grid(row=3,column=0)
+        self.smoothMode.grid(row=5,column=0)
 
         self.secList = IntVar()
         self.gprmc = IntVar()
         self.simple = IntVar()
         self.modeSecList = Checkbutton(self.settings, text ="SecList",variable=self.secList)
-        self.modeSecList.grid(row=3, column =1)
+        self.modeSecList.grid(row=5, column =1)
         
         self.modeGprmc = Checkbutton(self.settings, text ="Gprmc",variable=self.gprmc)
-        self.modeGprmc.grid(row=3, column =2)
+        self.modeGprmc.grid(row=5, column =2)
         
         self.modeSimple = Checkbutton(self.settings, text ="Simple",variable=self.simple)
-        self.modeSimple.grid(row=3, column =3)
+        self.modeSimple.grid(row=5, column =3)
 
         self.getCurrentMode()
                 
         self.lenListRaw = Label(self.settings,text ="Length of raw list")
-        self.lenListRaw.grid(row=5,column=0)
+        self.lenListRaw.grid(row=6,column=0)
         self.entryLenListRaw= Entry(self.settings)
-        self.entryLenListRaw.grid(row=5,column=1)
+        self.entryLenListRaw.grid(row=6,column=1)
         self.entryLenListRaw.insert(END,self.readSettingsFile("Length of rawlist"))
 
         self.lenListSmooth = Label(self.settings,text ="Length of smooth list")
-        self.lenListSmooth.grid(row=6,column=0)
+        self.lenListSmooth.grid(row=7,column=0)
         self.entryLenListSmooth = Entry(self.settings)
-        self.entryLenListSmooth.grid(row=6,column=1)
+        self.entryLenListSmooth.grid(row=7,column=1)
         self.entryLenListSmooth.insert(END,self.readSettingsFile("Length of smoothlist"))
 
     def getCurrentMode(self):
@@ -101,11 +113,17 @@ class Gui(Frame):
         for element in fileList:
             if wert in element:
                 x = element.split(":")
+                if(wert=="Port"):
+                    return x[1]
+                if(wert=="Baud"):
+                    return int(x[1])
                 return float(x[1])
         return "0"
 
     def writeSettingsFile(self):
         settingsFile = open("Settings","w")
+        settingsFile.write("Port:" + str(self.entryPort.get())+"\n")
+        settingsFile.write("Baud:" + str(self.entryBaudRate.get())+"\n")
         settingsFile.write("Trigger:" + str(self.isTrigger)+"\n")
         settingsFile.write("Desiered Distance:" + self.entryDisiredDistance.get()+"\n")
         settingsFile.write("Acceptable Deviation:" + self.entryAcceptableDeviation.get()+"\n")
