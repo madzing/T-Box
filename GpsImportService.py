@@ -23,6 +23,7 @@ class GpsImportService():
     def go(self):
         self.isNewPos = False 
         if self.gpsRead.istNewData():
+            print(str(self.getVelocity())+" m/s")
             if self.smoothMode == "GPRMC":
                     try:
                         self.velocity = self.gpsRead.getNewData()

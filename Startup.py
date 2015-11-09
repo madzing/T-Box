@@ -23,7 +23,6 @@ while True:
             ####################################################
             importer.go()
             trigger.go()
-            print(importer.getVelocity())
             ####################################################
             endTime = time.time()
             wait = round((1/gui.getRunsPerSecond())-(endTime-runTime),5)

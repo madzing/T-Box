@@ -81,7 +81,7 @@ class GpsList:
     def __isReliable(self,pos,time):
         goodList = self.getGoodDataList()
         lenGoodList = len(goodList)
-        if lenGoodList<=self.__maxListLen/2:
+        if lenGoodList<=self.__maxListLen/2 and isinstance(pos[0],float) and isinstance(pos[1],float):
             return True
         else:
             vNew = self.__distanceCalc(pos,goodList[lenGoodList-1][2])/self.__getTimeDiff(time,goodList[lenGoodList-1][1])
