@@ -13,6 +13,7 @@ gui = GuiService()
 while True:
     if gui.getIsTrigger():
         serialRead = ReadSerial(gui.getPort(),gui.getBaudRate(),"$GPGGA.log","$GPRMC.log","w")
+        serialRead.setDaemon(True)
         serialRead.start()
         importer = GpsImportService(gui)
         trigger = TriggerService(gui,importer)
@@ -22,8 +23,13 @@ while True:
             ####################################################
             importer.go()
             trigger.go()
+            print(importer.getVelocity())
             ####################################################
             endTime = time.time()
             wait = round((1/gui.getRunsPerSecond())-(endTime-runTime),5)
             if wait > 0:
                 time.sleep(wait)
+        serialRead.stop()
+        serialRead.join()
+    time.sleep(0.05)
+

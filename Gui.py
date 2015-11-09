@@ -155,6 +155,19 @@ class Gui(Frame):
             self.start.destroy()
             self.changeTriggerMode()
             self.writeSettingsFile()
+            
+            self.entryPort.configure(state = "disabled")
+            self.entryBaudRate.configure(state = "disabled")
+            self.entryDisiredDistance.configure(state = "disabled")
+            self.entryAcceptableDeviation.configure(state = "disabled")
+            self.entryRunsPerSecond.configure(state = "disabled")
+            self.modeSecList.configure(state = "disabled")
+            self.modeGprmc.configure(state = "disabled")
+            self.modeSimple.configure(state = "disabled")
+            self.entryLenListRaw.configure(state = "disabled")
+            self.entryLenListSmooth.configure(state = "disabled")
+
+            
         else:
             print("##############################################################")
             print("Please check your input! One or more requirements are not met!")
@@ -166,6 +179,16 @@ class Gui(Frame):
         self.stop.destroy()
         self.changeTriggerMode()
         self.writeSettingsFile()
+        self.entryPort.configure(state = "normal")
+        self.entryBaudRate.configure(state = "normal")
+        self.entryDisiredDistance.configure(state = "normal")
+        self.entryAcceptableDeviation.configure(state = "normal")
+        self.entryRunsPerSecond.configure(state = "normal")
+        self.modeSecList.configure(state = "normal")
+        self.modeGprmc.configure(state = "normal")
+        self.modeSimple.configure(state = "normal")
+        self.entryLenListRaw.configure(state = "normal")
+        self.entryLenListSmooth.configure(state = "normal")
 
     def __init__(self, master = None):
         self.settings = Frame()
@@ -179,9 +202,11 @@ class Gui(Frame):
         self.changeTriggerMode()
         self.writeSettingsFile()
         
+        
 
 ################################################################################
 root = Tk()
+root.title("T-BOX")
 app = Gui(master=root)
 app.mainloop()
 #root.destroy()

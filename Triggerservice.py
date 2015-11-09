@@ -27,7 +27,6 @@ class TriggerService:
 
     def go(self):
         self.trigger(self.GpsImportService.getVelocity())
-        print(self.GpsImportService.getVelocity())
         
     def trigger(self,vMeanNew):
         vGes = 0.0
@@ -44,7 +43,6 @@ class TriggerService:
             del self._vMeanSinceLastBang[:]
 
     def giveSignal(self):
-        print("Jetzt")
         GPIO.output(3, True)
 
     def getTimeDiff(self,time1,time2):
